@@ -90,10 +90,10 @@
     }],
     ['OS=="mac"', {
       "include_dirs" : [
-        "/usr/local/Cellar/ffmpeg/6.0/include"
+        "/usr/local/Cellar/ffmpeg@6/6.1.1/include"
       ],
       "library_dirs": [
-        "/usr/local/Cellar/ffmpeg/6.0/lib",
+        "/usr/local/Cellar/ffmpeg@6/6.1.1/lib",
       ]
     }],
   ]

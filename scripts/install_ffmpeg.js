@@ -24,9 +24,9 @@ const fs = require('fs');
 const util = require('util');
 const https = require('https');
 const cp = require('child_process');
-const [ mkdir, access, execFile, exec ] = // eslint-disable-line
-  [ fs.mkdir, fs.access, cp.execFile, cp.exec ].map(util.promisify);
-const { copyFile } = require('fs/promises');
+const [mkdir, access, execFile, exec] = // eslint-disable-line
+  [fs.mkdir, fs.access, cp.execFile, cp.exec].map(util.promisify);
+const {copyFile} = require('fs/promises');
 
 async function get(ws, url, name) {
   let received = 0;
@@ -34,7 +34,7 @@ async function get(ws, url, name) {
   return new Promise((comp, err) => {
     https.get(url, res => {
       if (res.statusCode === 301 || res.statusCode === 302) {
-        err({ name: 'RedirectError', message: res.headers.location });
+        err({name: 'RedirectError', message: res.headers.location});
       } else {
         res.pipe(ws);
         if (totalLength == 0) {
@@ -47,7 +47,7 @@ async function get(ws, url, name) {
         res.on('error', err);
         res.on('data', x => {
           received += x.length;
-          process.stdout.write(`Downloaded ${received * 100/ totalLength | 0 }% of '${name}'.\r`);
+          process.stdout.write(`Downloaded ${received * 100 / totalLength | 0}% of '${name}'.\r`);
         });
       }
     }).on('error', err);
@@ -71,7 +71,7 @@ async function getHTML(url, name) {
       res.on('data', (chunk) => {
         chunks.push(chunk);
         received += chunk.length;
-        process.stdout.write(`Downloaded ${received * 100/ totalLength | 0 }% of '${name}'.\r`);
+        process.stdout.write(`Downloaded ${received * 100 / totalLength | 0}% of '${name}'.\r`);
       });
     }).on('error', reject);
   });
@@ -108,7 +108,7 @@ async function win32() {
     if (e.code === 'EEXIST') return;
     else throw e;
   });
-  
+
   // Check if ffmpeg binaries already downloaded
   const ffmpegFilename = 'ffmpeg-6.x-win64-shared';
   await access(`ffmpeg/${ffmpegFilename}`, fs.constants.R_OK).catch(async () => {
@@ -141,7 +141,7 @@ async function win32() {
 
 async function linux() {
   console.log('Checking FFmpeg dependencies for Beam Coder on Linux.');
-  const { stdout } = await execFile('ldconfig', ['-p']).catch(console.error);
+  const {stdout} = await execFile('ldconfig', ['-p']).catch(console.error);
   let result = 0;
 
   if (stdout.indexOf('libavcodec.so.60') < 0) {
@@ -189,9 +189,9 @@ async function darwin() {
   console.log('Checking for FFmpeg dependencies via HomeBrew.');
   let output;
   let returnMessage;
-  
+
   try {
-    output = await exec('brew list ffmpeg');
+    output = await exec('brew list ffmpeg@6');
     returnMessage = 'FFmpeg already present via Homebrew.';
   } catch (err) {
     if (err.stderr !== 'Error: No such keg: /usr/local/Cellar/ffmpeg\n') {
@@ -202,7 +202,7 @@ async function darwin() {
 
     console.log('FFmpeg not installed. Attempting to install via Homebrew.');
     try {
-      output = await exec('brew install nasm pkg-config texi2html ffmpeg');
+      output = await exec('brew install nasm pkg-config texi2html ffmpeg@6');
       returnMessage = 'FFmpeg installed via Homebrew.';
     } catch (err) {
       console.log('Failed to install ffmpeg:\n');
@@ -218,31 +218,31 @@ async function darwin() {
 }
 
 switch (os.platform()) {
-case 'win32':
-  if (os.arch() != 'x64') {
-    console.error('Only 64-bit platforms are supported.');
-    process.exit(1);
-  } else {
-    win32().catch(console.error);
-  }
-  break;
-case 'linux':
-  if (os.arch() != 'x64' && os.arch() != 'arm64') {
-    console.error('Only 64-bit platforms are supported.');
-    process.exit(1);
-  } else {
-    linux();
-  }
-  break;
-case 'darwin':
-  if (os.arch() != 'x64' && os.arch() != 'arm64') {
-    console.error('Only 64-bit platforms are supported.');
-    process.exit(1);
-  } else {
-    darwin();
-  }
-  break;
-default:
-  console.error(`Platfrom ${os.platform()} is not supported.`);
-  break;
+  case 'win32':
+    if (os.arch() != 'x64') {
+      console.error('Only 64-bit platforms are supported.');
+      process.exit(1);
+    } else {
+      win32().catch(console.error);
+    }
+    break;
+  case 'linux':
+    if (os.arch() != 'x64' && os.arch() != 'arm64') {
+      console.error('Only 64-bit platforms are supported.');
+      process.exit(1);
+    } else {
+      linux();
+    }
+    break;
+  case 'darwin':
+    if (os.arch() != 'x64' && os.arch() != 'arm64') {
+      console.error('Only 64-bit platforms are supported.');
+      process.exit(1);
+    } else {
+      darwin();
+    }
+    break;
+  default:
+    console.error(`Platfrom ${os.platform()} is not supported.`);
+    break;
 }
