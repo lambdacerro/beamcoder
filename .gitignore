@@ -65,7 +65,7 @@ typings/
 build/
 
 # FFmpeg install folder
-ffmpeg/
+ffmpeg*/
 
 # Test media files
 *.MP4
