@@ -1020,7 +1020,7 @@ await muxer.writeHeader({
 });
 ```
 
-Subsequently to writing the header, the options can be viewed and modified through the `priv_data` property of the muxer. For details of the available options per format, see the [FFmpeg muser documentation](https://ffmpeg.org/ffmpeg-formats.html#Muxers) or the associated `OutputFormat` object which is the `oformat` property of the muxer. Specifically:
+Subsequently to writing the header, the options can be viewed and modified through the `priv_data` property of the muxer. For details of the available options per format, see the [FFmpeg muxer documentation](https://ffmpeg.org/ffmpeg-formats.html#Muxers) or the associated `OutputFormat` object which is the `oformat` property of the muxer. Specifically:
 
     console.log(muxer.oformat.priv_class.options);
 
