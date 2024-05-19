@@ -48,6 +48,7 @@
     "index.d.ts",
     "bindings.js",
     "beamstreams.js",
+    "binding.gyp",
     "types/",
     "src/",
     "scripts/"
