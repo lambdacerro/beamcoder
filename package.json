@@ -1,6 +1,6 @@
 {
-  "name": "@roamhq/beamcoder",
-  "version": "0.8.4",
+  "name": "@lambdacerro/beamcoder",
+  "version": "0.8.5",
   "description": "Node.js native bindings to FFmpeg.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -16,12 +16,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WonderInventions/beamcoder.git"
+    "url": "git+https://github.com/lambdacerro/beamcoder.git"
   },
   "bugs": {
-    "url": "https://github.com/WonderInventions/beamcoder/issues"
+    "url": "https://github.com/lambdacerro/beamcoder/issues"
   },
-  "homepage": "https://github.com/WonderInventions/beamcoder#readme",
+  "homepage": "https://github.com/lambdacerro/beamcoder#readme",
   "contributors": [
     "Streampunk Media Ltd",
     "Jack Duvall <jack@ro.am>"
@@ -42,12 +42,6 @@
   "devDependencies": {
     "eslint": "^8.9.0",
     "tape": "^5.5.2"
-  },
-  "optionalDependencies": {
-    "@roamhq/beamcoder-win32-x64": "0.8.1",
-    "@roamhq/beamcoder-linux-x64": "0.8.0",
-    "@roamhq/beamcoder-darwin-arm64": "0.8.3",
-    "@roamhq/beamcoder-darwin-x64": "0.8.3"
   },
   "files": [
     "index.js",
