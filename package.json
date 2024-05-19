@@ -48,6 +48,8 @@
     "index.d.ts",
     "bindings.js",
     "beamstreams.js",
-    "types/"
+    "types/",
+    "src/",
+    "scripts/"
   ]
 }
