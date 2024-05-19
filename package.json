@@ -5,7 +5,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "install": "echo Using prebuilt binary, use `npm run build` to compile locally",
+    "install": "node-gyp rebuild",
     "prebuild": "node ./scripts/install_ffmpeg.js",
     "build": "node-gyp rebuild",
     "make-prebuilt": "node ./scripts/make_prebuilt.js",
